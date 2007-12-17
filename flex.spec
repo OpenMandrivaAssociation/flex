@@ -9,7 +9,6 @@ Source:		ftp.gnu.org:/non-gnu/flex/flex-%version.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
 BuildRequires:	byacc autoconf2.1
 Conflicts:	flex-reentrant
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
 The flex program generates scanners. Scanners are
