@@ -1,13 +1,13 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.33
-Release:	%mkrel 3
-License:	GPL
+Version:	2.5.35
+Release:	%mkrel 1
+License:	BSD
 Group:		Development/Other
 URL: 		http://flex.sourceforge.net/
-Source:		ftp.gnu.org:/non-gnu/flex/flex-%version.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
-BuildRequires:	byacc autoconf2.1
+BuildRequires:	bison
 Conflicts:	flex-reentrant
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -38,32 +38,43 @@ rm -f skel.c
 autoconf
 
 %build
-%configure
+%configure2_5x \
+	--disable-rpath
 %make
 
+%check
+make check
+
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall
-%find_lang %name
+rm -rf %{buildroot}
 
-cd $RPM_BUILD_ROOT%{_bindir}
-ln -sf flex lex
+%makeinstall_std
 
-cd $RPM_BUILD_ROOT%{_mandir}/
-cd man1
-ln -s flex.1 lex.1
-ln -s flex.1 flex++.1
+%find_lang %{name}
+
+#cd %{buildroot}%{_bindir}
+#ln -sf flex lex
+
+#cd %{buildroot}%{_mandir}/
+#cd man1
+#ln -s flex.1 lex.1
+#ln -s flex.1 flex++.1
+
+pushd %{buildroot}
+ln -sf flex .%{_bindir}/lex
+#ln -sf flex .%{_bindir}/flex++
+ln -s flex.1 .%{_mandir}/man1/lex.1
+ln -s flex.1 .%{_mandir}/man1/flex++.1
+popd
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-%files -f %name.lang
-%defattr(-,root,root,755)
-%doc COPYING NEWS README
+%files -f %{name}.lang
+%defattr(-,root,root)
+%doc NEWS README
 %{_bindir}/*
 %{_mandir}/man1/*
-%{_libdir}/libfl.a
+%{_libdir}/libfl*.a
 %{_includedir}/FlexLexer.h
 %{_infodir}/*
-
-
