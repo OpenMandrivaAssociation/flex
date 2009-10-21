@@ -1,7 +1,7 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.5.35
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD
 Group:		Development/Other
 URL: 		http://flex.sourceforge.net/
@@ -12,6 +12,7 @@ Patch100:	flex-2.5.35-sign.patch
 Patch101:	flex-2.5.35-hardening.patch
 Patch102:	flex-2.5.35-gcc44.patch
 BuildRequires:	bison
+Requires:	m4
 Conflicts:	flex-reentrant
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
