@@ -1,20 +1,15 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.35
-Release:	%mkrel 8
+Version:	2.5.36
+Release:	1
 License:	BSD
 Group:		Development/Other
 URL: 		http://flex.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
-# Fedora patches
-Patch100:	flex-2.5.35-sign.patch
-Patch101:	flex-2.5.35-hardening.patch
-Patch102:	flex-2.5.35-gcc44.patch
 BuildRequires:	bison
 Requires:	m4
 Conflicts:	flex-reentrant
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
 The flex program generates scanners. Scanners are
@@ -36,11 +31,7 @@ application development.
 
 %prep
 %setup -q
-%patch0 -p0
-
-%patch100 -p1
-%patch101 -p1
-%patch102 -p1
+%patch0 -p0 -b .skel~
 
 # Force regeneration of skel.c with Patch2 changes
 rm -f skel.c
