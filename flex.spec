@@ -9,7 +9,6 @@ Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
 BuildRequires:	bison
 BuildRequires:	texinfo
-BuildRequires:	texinfo-tex
 BuildRequires:	gettext-devel
 Requires:	m4
 Conflicts:	flex-reentrant
