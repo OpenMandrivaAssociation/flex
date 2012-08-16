@@ -1,13 +1,14 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.36
+Version:	2.5.37
 Release:	1
 License:	BSD
 Group:		Development/Other
-URL: 		http://flex.sourceforge.net/
+URL:		http://flex.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
-BuildRequires:	bison texinfo
+BuildRequires:	bison
+BuildRequires:	texinfo
 Requires:	m4
 Conflicts:	flex-reentrant
 
@@ -39,7 +40,7 @@ rm -f skel.c
 autoconf
 
 %build
-CFLAGS="-fPIC %optflags" %configure2_5x \
+CFLAGS="-fPIC %{optflags}" %configure2_5x \
 	--disable-rpath
 %make
 
@@ -47,8 +48,6 @@ CFLAGS="-fPIC %optflags" %configure2_5x \
 make check
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
 %find_lang %{name}
@@ -68,11 +67,7 @@ ln -s flex.1 .%{_mandir}/man1/lex.1
 ln -s flex.1 .%{_mandir}/man1/flex++.1
 popd
 
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc NEWS README
 %{_bindir}/*
 %{_mandir}/man1/*
