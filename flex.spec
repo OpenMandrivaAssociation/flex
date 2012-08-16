@@ -9,10 +9,12 @@ Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
 BuildRequires:	bison
 BuildRequires:	texinfo
+BuildRequires:	texinfo-tex
+BuildRequires:	gettext-devel
 Requires:	m4
 Conflicts:	flex-reentrant
 
-%description 
+%description
 The flex program generates scanners. Scanners are
 programs which can recognize lexical patterns in text.
 
@@ -36,10 +38,11 @@ application development.
 
 # Force regeneration of skel.c with Patch2 changes
 rm -f skel.c
-# Force regeneration of configure script with --libdir= support
-autoconf
 
 %build
+# Force regeneration of configure script with --libdir= support
+autoreconf -fi
+
 CFLAGS="-fPIC %{optflags}" %configure2_5x \
 	--disable-rpath
 %make
