@@ -9,7 +9,9 @@ Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
 BuildRequires:	bison
 BuildRequires:	texinfo
+BuildRequires:	texlive
 BuildRequires:	gettext-devel
+BuildRequires:	indent
 Requires:	m4
 Conflicts:	flex-reentrant
 
@@ -47,6 +49,9 @@ CFLAGS="-fPIC %{optflags}" %configure2_5x \
 %make
 
 %check
+#(tpg) these tests used features removed in bison-2.6
+sed -i -e '/test-bison-yylloc/d' -e '/test-bison-yylval/d' tests/Makefile.in
+
 make check
 
 %install
