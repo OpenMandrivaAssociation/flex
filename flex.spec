@@ -35,6 +35,7 @@ application development.
 %package	devel
 Summary:	Static libraries for flex scanner generator
 Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
 Conflicts:	flex < 2.5.37-2
 
 %description	devel
