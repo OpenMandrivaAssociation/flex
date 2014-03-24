@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   flex-2.5.37.tar.bz2: db4b140f2aff34c6197cab919828cc4146aae218
+sources:
+  flex-2.5.38.tar.xz: e9fc6f70544c027b5aba0c63188cf6788fd0fb3e

@@ -1,11 +1,11 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.37
-Release:	6
+Version:	2.5.38
+Release:	1
 License:	BSD
 Group:		Development/Other
 Url:		http://flex.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
+Source0:	http://sourceforge.net/projects/flex/files/%{name}-%{version}.tar.xz
 Patch0:		flex-2.5.4a-skel.patch
 BuildRequires:	bison
 BuildRequires:	indent
@@ -82,4 +82,5 @@ popd
 %files devel
 %{_includedir}/FlexLexer.h
 %{_libdir}/libfl*.a
+
 
