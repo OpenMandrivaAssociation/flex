@@ -1,7 +1,7 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.37
-Release:	6
+Version:	2.5.39
+Release:	1
 License:	BSD
 Group:		Development/Other
 Url:		http://flex.sourceforge.net/
