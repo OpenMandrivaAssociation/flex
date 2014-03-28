@@ -7,6 +7,7 @@ Group:		Development/Other
 Url:		http://flex.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 Patch0:		flex-2.5.4a-skel.patch
+Patch1:		flex-2.5.37-libtool.patch
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	texinfo
@@ -44,6 +45,7 @@ This package contains the static libraries and headers for %{name}.
 %prep
 %setup -q
 %patch0 -p0 -b .skel~
+%patch1 -p1 -R
 
 # Force regeneration of skel.c with Patch2 changes
 rm -f skel.c

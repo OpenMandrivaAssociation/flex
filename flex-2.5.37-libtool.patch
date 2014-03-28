@@ -1,0 +1,72 @@
+--- flex-2.5.37/lib/Makefile.am	2012-07-22 20:27:24.000000000 -0400
++++ flex-2.5.38/lib/Makefile.am	2012-12-08 13:57:02.000000000 -0500
+@@ -1,4 +1,4 @@
+-noinst_LIBRARIES = libcompat.a
+-libcompat_a_SOURCES = lib.c
+-libcompat_a_LIBADD = $(LIBOBJS)
++noinst_LTLIBRARIES = libcompat.la
++libcompat_la_SOURCES = lib.c
++libcompat_la_LIBADD = $(LIBOBJS)
+ 
+--- flex-2.5.37/Makefile.am	2012-08-02 13:14:45.000000000 -0400
++++ flex-2.5.38/Makefile.am	2013-05-28 17:56:49.000000000 -0400
+@@ -39,9 +39,9 @@ m4 = @M4@
+ indent = @INDENT@
+ 
+ bin_PROGRAMS = flex
+-lib_LIBRARIES = \
+-	libfl.a \
+-	libfl_pic.a
++lib_LTLIBRARIES = \
++	libfl.la \
++	libfl_pic.la
+ 
+ flex_SOURCES = \
+ 	ccl.c \
+@@ -67,19 +67,19 @@ flex_SOURCES = \
+ 	regex.c
+ 
+ 
+-LDADD = lib/libcompat.a
++LDADD = lib/libcompat.la
+ 
+-libfl_a_SOURCES = \
++libfl_la_SOURCES = \
+ 	libmain.c \
+ 	libyywrap.c
+ 
+-libfl_pic_a_SOURCES = \
++libfl_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@
++
++libfl_pic_la_SOURCES = \
+ 	libmain.c \
+ 	libyywrap.c
+ 
+-libfl_pic_a_CFLAGS =  \
+-	-fPIC         \
+-	$(AM_CFLAGS)
++libfl_pic_la_LDFLAGS = -no-undefined -version-info @SHARED_VERSION_INFO@
+ 
+ noinst_HEADERS = \
+ 	flexdef.h \
+--- a/configure.ac
++++ b/configure.ac
+@@ -26,6 +26,9 @@
+ 
+ AC_INIT([the fast lexical analyser generator], [2.5.39],
+ [flex-help@lists.sourceforge.net], [flex])
++SHARED_VERSION_INFO="2:0:0"
++AC_SUBST(SHARED_VERSION_INFO)
++
+ AC_CONFIG_SRCDIR([scan.l])
+ AM_INIT_AUTOMAKE([gnu check-news std-options dist-bzip2 dist-xz 1.10])
+ AC_CONFIG_HEADER([config.h:conf.in])
+@@ -44,7 +44,7 @@
+ AC_PROG_CXX
+ AM_PROG_CC_C_O
+ AC_PROG_LN_S
+-AC_PROG_RANLIB
++LT_INIT
+ AC_PROG_AWK
+ AC_PROG_INSTALL
+ 
