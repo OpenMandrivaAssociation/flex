@@ -1,7 +1,10 @@
+# dont want lto on a static lib
+%define _disable_lto 1
+
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.5.39
-Release:	6
+Release:	7
 License:	BSD
 Group:		Development/Other
 Url:		http://flex.sourceforge.net/
@@ -54,7 +57,7 @@ rm -f skel.c
 autoreconf -fi
 
 %build
-CFLAGS="-fPIC %{optflags}" %configure2_5x
+CFLAGS="-fPIC %{optflags}" %configure
 
 %make
 
