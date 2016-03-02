@@ -3,8 +3,8 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.5.39
-Release:	7
+Version:	2.6.0
+Release:	1
 License:	BSD
 Group:		Development/Other
 Url:		http://flex.sourceforge.net/
@@ -47,14 +47,6 @@ This package contains the static libraries and headers for %{name}.
 
 %prep
 %setup -q
-%patch0 -p0 -b .skel~
-%patch1 -p1 -R
-
-# Force regeneration of skel.c with Patch2 changes
-rm -f skel.c
-
-# Force regeneration of configure script with --libdir= support
-autoreconf -fi
 
 %build
 CFLAGS="-fPIC %{optflags}" %configure
