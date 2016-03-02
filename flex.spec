@@ -9,8 +9,6 @@ License:	BSD
 Group:		Development/Other
 Url:		http://flex.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
-Patch0:		flex-2.5.4a-skel.patch
-Patch1:		flex-2.5.37-libtool.patch
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	texinfo
