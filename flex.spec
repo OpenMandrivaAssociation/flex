@@ -47,7 +47,7 @@ This package contains the static libraries and headers for %{name}.
 %setup -q
 
 %build
-CFLAGS="-fPIC %{optflags}" %configure
+CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
 
 %make
 
