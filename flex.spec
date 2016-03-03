@@ -11,9 +11,8 @@ Url:		http://flex.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
 BuildRequires:	bison
 BuildRequires:	indent
-BuildRequires:	texinfo
-BuildRequires:	texlive
 BuildRequires:	gettext-devel
+BuildRequires:	help2man
 Requires:	m4
 
 %description
