@@ -3,12 +3,12 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.6.0
+Version:	2.6.1
 Release:	1
 License:	BSD
 Group:		Development/Other
-Url:		http://flex.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/flex/%{name}-%{version}.tar.bz2
+Url:		https://github.com/westes/flex
+Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	gettext-devel
