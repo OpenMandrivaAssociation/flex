@@ -3,12 +3,12 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.6.1
+Version:	2.6.2
 Release:	1
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
-Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	gettext-devel
@@ -76,4 +76,3 @@ popd
 %files devel
 %{_includedir}/FlexLexer.h
 %{_libdir}/libfl*.a
-
