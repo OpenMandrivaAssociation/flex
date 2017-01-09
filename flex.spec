@@ -68,7 +68,7 @@ ln -s flex.1 .%{_mandir}/man1/flex++.1
 popd
 
 %files -f %{name}.lang
-%doc NEWS README
+%doc NEWS
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_infodir}/*
