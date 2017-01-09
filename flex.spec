@@ -55,6 +55,7 @@ CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
 sed -i -e '/test-bison-yylloc/d' -e '/test-bison-yylval/d' tests/Makefile.in
 
 make check
+cat tests/test-suite.log
 
 %install
 %makeinstall_std
