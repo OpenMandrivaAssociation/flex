@@ -1,8 +1,6 @@
 # dont want lto on a static lib
 %define _disable_lto 1
 
-%define _disable_rebuild_configure 1
-
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.6.4
@@ -46,6 +44,7 @@ This package contains the static libraries and headers for %{name}.
 
 %prep
 %setup -q
+./autogen.sh
 
 %build
 CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
