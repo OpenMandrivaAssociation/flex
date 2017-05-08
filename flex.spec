@@ -44,7 +44,6 @@ This package contains the static libraries and headers for %{name}.
 
 %prep
 %setup -q
-./autogen.sh
 
 %build
 CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
