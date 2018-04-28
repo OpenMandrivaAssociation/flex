@@ -16,6 +16,7 @@ BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	gettext-devel
 BuildRequires:	help2man
+BuildRequires:	texinfo
 Requires:	m4
 
 %description
