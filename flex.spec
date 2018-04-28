@@ -9,6 +9,9 @@ License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
 Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{version}.tar.gz
+# Pull in changes from post-v2.6.4 tag in the flex git repository
+# Fixes, among other things, doxygen build failures
+Patch0:		flex-2.6.4-changes-from-git.patch
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	gettext-devel
@@ -43,7 +46,7 @@ Conflicts:	flex < 2.5.37-2
 This package contains the static libraries and headers for %{name}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
@@ -79,3 +82,4 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %files devel
 %{_includedir}/FlexLexer.h
 %{_libdir}/libfl*.a
+%{_libdir}/pkgconfig/libfl.pc
