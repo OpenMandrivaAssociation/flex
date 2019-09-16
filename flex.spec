@@ -4,7 +4,7 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.6.4
-Release:	4
+Release:	5
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
@@ -37,13 +37,13 @@ many programs as part of their build process.
 You should install flex if you are going to use your system for
 application development.
 
-%package	devel
+%package devel
 Summary:	Static libraries for flex scanner generator
 Group:		Development/Other
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	flex < 2.5.37-2
 
-%description	devel
+%description devel
 This package contains the static libraries and headers for %{name}.
 
 %prep
@@ -52,7 +52,7 @@ This package contains the static libraries and headers for %{name}.
 %build
 CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
 
-%make
+%make_build
 
 %check
 #(tpg) these tests used features removed in bison-2.6
@@ -62,7 +62,7 @@ make check ||:
 cat tests/test-suite.log
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
