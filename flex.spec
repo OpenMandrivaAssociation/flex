@@ -4,7 +4,7 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.6.4
-Release:	5
+Release:	6
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
@@ -12,6 +12,9 @@ Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{
 # Pull in changes from post-v2.6.4 tag in the flex git repository
 # Fixes, among other things, doxygen build failures
 Patch0:		flex-2.6.4-changes-from-git.patch
+# -Wmaybe-uninitialized is gcc specific. Don't inject it
+# when using clang.
+Patch1:		flex-2.6.4-no-Wmaybe-uninitialized-in-clang.patch
 BuildRequires:	bison
 BuildRequires:	indent
 BuildRequires:	gettext-devel

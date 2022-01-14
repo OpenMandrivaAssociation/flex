@@ -1,0 +1,19 @@
+diff -up flex-2.6.4/src/parse.c.omv~ flex-2.6.4/src/parse.c
+--- flex-2.6.4/src/parse.c.omv~	2022-01-14 12:54:54.571467325 +0100
++++ flex-2.6.4/src/parse.c	2022-01-14 12:56:18.310778640 +0100
+@@ -381,7 +381,14 @@ typedef short int yytype_int16;
+ # define YYUSE(E) /* empty */
+ #endif
+ 
+-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
++#if defined __clang__
++/* Suppress an incorrect diagnostic about yylval being uninitialized.  */
++# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
++    _Pragma ("GCC diagnostic push") \
++    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
++# define YY_IGNORE_MAYBE_UNINITIALIZED_END \
++    _Pragma ("GCC diagnostic pop")
++#elif defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+ /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+ # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+     _Pragma ("GCC diagnostic push") \
