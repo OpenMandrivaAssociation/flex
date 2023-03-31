@@ -4,7 +4,7 @@
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.6.4
-Release:	7
+Release:	8
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
