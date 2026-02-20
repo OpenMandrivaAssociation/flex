@@ -1,10 +1,13 @@
-# dont want lto on a static lib
-%define _disable_lto 1
+# libfl intentionally leaves yylex undefined because that will be defined
+# by the application using it (through the code generator included here)
+%define _disable_ld_no_undefined 1
+
+%define libname %mklibname fl
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
 Version:	2.6.4
-Release:	8
+Release:	9
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
@@ -41,10 +44,18 @@ many programs as part of their build process.
 You should install flex if you are going to use your system for
 application development.
 
+%package -n %{libname}
+Summary:	Shared library for the flex scanner generator
+Group:		System/Libraries
+
+%description -n %{libname}
+Shared library for the flex scanner generator
+
 %package devel
 Summary:	Static libraries for flex scanner generator
 Group:		Development/Other
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{EVRD}
+Requires:	%{libname} = %{EVRD}
 Conflicts:	flex < 2.5.37-2
 
 %description devel
@@ -53,9 +64,10 @@ This package contains the static libraries and headers for %{name}.
 %prep
 %autosetup -p1
 
-%build
-CFLAGS="-fPIC %{optflags}" %configure --disable-shared --enable-static
+%conf
+CFLAGS="-fPIC %{optflags}" %configure --enable-shared --enable-static
 
+%build
 %make_build
 
 %check
@@ -84,7 +96,11 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %{_mandir}/man1/*
 %{_infodir}/*
 
+%files -n %{libname}
+%{_libdir}/libfl.so.*
+
 %files devel
 %{_includedir}/FlexLexer.h
 %{_libdir}/libfl*.a
+%{_libdir}/libfl.so
 %{_libdir}/pkgconfig/libfl.pc
