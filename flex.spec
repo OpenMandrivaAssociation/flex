@@ -18,6 +18,7 @@ Patch0:		flex-2.6.4-changes-from-git.patch
 # -Wmaybe-uninitialized is gcc specific. Don't inject it
 # when using clang.
 Patch1:		flex-2.6.4-no-Wmaybe-uninitialized-in-clang.patch
+BuildRequires:	gnu-config
 BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	indent
