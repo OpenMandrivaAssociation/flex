@@ -17,9 +17,12 @@ Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{
 Patch0:		flex-2.6.5-clang-no-Wmaybe-uninitialized.patch
 BuildRequires:	gnu-config
 BuildRequires:	make
+BuildRequires:	slibtool
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	indent
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.23
 BuildRequires:	help2man
 BuildRequires:	texinfo
 Requires:	m4
