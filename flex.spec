@@ -6,18 +6,15 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.6.4
-Release:	9
+Version:	2.6.5
+Release:	1
 License:	BSD
 Group:		Development/Other
 Url:		https://github.com/westes/flex
 Source0:	https://github.com/westes/flex/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Pull in changes from post-v2.6.4 tag in the flex git repository
-# Fixes, among other things, doxygen build failures
-Patch0:		flex-2.6.4-changes-from-git.patch
-# -Wmaybe-uninitialized is gcc specific. Don't inject it
-# when using clang.
-Patch1:		flex-2.6.4-no-Wmaybe-uninitialized-in-clang.patch
+# Bison's generated parser asks Clang to ignore -Wmaybe-uninitialized.
+# Clang 23 rejects that warning group.
+Patch0:		flex-2.6.5-clang-no-Wmaybe-uninitialized.patch
 BuildRequires:	gnu-config
 BuildRequires:	make
 BuildRequires:	bison
@@ -72,9 +69,6 @@ CFLAGS="-fPIC %{optflags}" %configure --enable-shared --enable-static
 %make_build
 
 %check
-#(tpg) these tests used features removed in bison-2.6
-sed -i -e '/test-bison-yylloc/d' -e '/test-bison-yylval/d' tests/Makefile.in
-
 make check ||:
 cat tests/test-suite.log
 

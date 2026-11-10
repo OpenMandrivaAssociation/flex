@@ -1,0 +1,18 @@
+--- a/src/parse.c
++++ b/src/parse.c
+@@ -595,7 +595,14 @@
+ #endif
+ 
+ /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+-#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
++#if defined __clang__
++/* Clang rejects -Wmaybe-uninitialized as an unknown warning group. */
++# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
++    _Pragma ("GCC diagnostic push")                                     \
++    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
++# define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
++    _Pragma ("GCC diagnostic pop")
++#elif defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+ # if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+ #  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+     _Pragma ("GCC diagnostic push")                                     \
