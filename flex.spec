@@ -6,7 +6,7 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.7.3
+Version:	2.7.4
 Release:	1
 License:	BSD
 Group:		Development/Other
