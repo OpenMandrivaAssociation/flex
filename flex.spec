@@ -6,7 +6,7 @@
 
 Summary:	A tool for creating scanners (text pattern recognizers)
 Name:		flex
-Version:	2.7.9
+Version:	2.7.10
 Release:	1
 License:	BSD
 Group:		Development/Other
@@ -70,6 +70,29 @@ CFLAGS="-fPIC %{optflags}" %configure --enable-shared --enable-static
 
 %build
 %make_build
+
+# Table compression and the -C full-table / equivalence-class modes
+# dominate a scanner generation. Train on flex's own grammar.
+%pgo
+flex=./_OMV_rpm_build/src/flex
+if [ ! -x "$flex" ]; then
+	echo "PGO: instrumented flex not found" >&2
+	find ./_OMV_rpm_build -name flex -type f || true
+	exit 1
+fi
+train=$(mktemp -d)
+trap 'rm -rf "$train"' EXIT
+for mode in default Cfe CF CFa Ce; do
+	if [ "$mode" = default ]; then
+		"$flex" -o "$train/scan-default.c" src/scan.l
+	else
+		"$flex" -C"$mode" -o "$train/scan-$mode.c" src/scan.l
+	fi
+done
+for l in tests/*.l; do
+	base=$(basename "$l" .l)
+	"$flex" -o "$train/${base}.c" "$l" || true
+done
 
 %check
 make check ||:
