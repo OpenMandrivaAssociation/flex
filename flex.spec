@@ -73,7 +73,7 @@ CFLAGS="-fPIC %{optflags}" %configure --enable-shared --enable-static
 
 # Table compression and the -C full-table / equivalence-class modes
 # dominate a scanner generation. Train on flex's own grammar.
-# %configure builds in the source tree. src/flex is the slibtool
+# configure builds in the source tree. src/flex is the slibtool
 # wrapper; it runs the instrumented binary in src/.libs.
 %pgo
 flex=
