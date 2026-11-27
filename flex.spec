@@ -94,7 +94,8 @@ for mode in default Cfe CF CFa Ce; do
 	if [ "$mode" = default ]; then
 		"$flex" -o "$train/scan-default.c" src/scan.l
 	else
-		"$flex" -C"$mode" -o "$train/scan-$mode.c" src/scan.l
+		# mode is already Cfe, CF, CFa, or Ce. A second -C makes -CCfe.
+		"$flex" -"$mode" -o "$train/scan-$mode.c" src/scan.l
 	fi
 done
 for l in tests/*.l; do
