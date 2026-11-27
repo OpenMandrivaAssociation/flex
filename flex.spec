@@ -73,11 +73,19 @@ CFLAGS="-fPIC %{optflags}" %configure --enable-shared --enable-static
 
 # Table compression and the -C full-table / equivalence-class modes
 # dominate a scanner generation. Train on flex's own grammar.
+# %configure builds in the source tree. src/flex is the slibtool
+# wrapper; it runs the instrumented binary in src/.libs.
 %pgo
-flex=./_OMV_rpm_build/src/flex
-if [ ! -x "$flex" ]; then
+flex=
+for cand in ./src/flex ./src/.libs/flex ./_OMV_rpm_build/src/flex; do
+	if [ -x "$cand" ]; then
+		flex=$cand
+		break
+	fi
+done
+if [ -z "$flex" ]; then
 	echo "PGO: instrumented flex not found" >&2
-	find ./_OMV_rpm_build -name flex -type f || true
+	find . -name flex -type f || true
 	exit 1
 fi
 train=$(mktemp -d)
